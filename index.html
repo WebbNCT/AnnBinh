@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pháo hoa</title>
+    <style>
+      body,
+      html {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+        flex-direction: column;
+        text-align: center;
+        position: relative;
+      }
+      #c {
+        background-color: #ffffff;
+      }
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+
+      #btn {
+        height: 55px;
+        width: 75px;
+        cursor: pointer;
+        background-color: #ce4f6a00;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: opacity 0.3s ease;
+      }
+
+      #btnYes,
+      #btnNo {
+        padding: 10px 20px;
+        font-size: 18px;
+        cursor: pointer;
+        background-color: #ce4f6a;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        transition: all 0.3s ease-in-out;
+        margin: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      h1,
+      p {
+        transition: opacity 0.3s ease;
+        font-family: "Times New Roman", "Arial", sans-serif;
+      }
+
+      .hide {
+        display: none;
+      }
+
+      .show {
+        opacity: 1;
+      }
+
+      #btn img {
+        width: 60px;
+        height: 40px;
+      }
+
+      @keyframes shake {
+        0% {
+          transform: translateX(0);
+        }
+
+        25% {
+          transform: translateX(-5px);
+        }
+
+        50% {
+          transform: translateX(5px);
+        }
+
+        75% {
+          transform: translateX(-5px);
+        }
+
+        100% {
+          transform: translateX(5px);
+        }
+      }
+
+      .shake {
+        animation: shake 0.5s ease-in-out;
+      }
+
+      #btn:hover,
+      #btnYes:hover,
+      #btnNo:hover {
+        background-color: #d37da8;
+        transform: translateY(-4px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      #btn:active,
+      #btnYes:active,
+      #btnNo:active {
+        transform: translateY(2px);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      .message {
+        display: none;
+        font-size: 20px;
+        margin: 10px;
+        padding: 30px;
+        border: 2px solid #f19fb3;
+        border-radius: 8px;
+        background-color: #ffffff;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 90%;
+        overflow: hidden;
+        word-wrap: break-word;
+        transform: perspective(500px) rotateY(10deg);
+        transition: all 0.3s ease-in-out;
+      }
+
+      .message.show {
+        transform: perspective(500px) rotateY(0deg);
+      }
+
+      .div-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        max-width: 100%;
+        overflow: hidden;
+        margin: 10px 0;
+      }
+
+      .message-text {
+        font-size: 18px;
+        display: block;
+        padding: 30px;
+        border: 2px solid #f19fb3;
+        border-radius: 10px;
+        background-color: #ffffff;
+        text-align: center;
+        margin-bottom: 30px;
+        transform: perspective(500px) rotateY(10deg);
+        transition: all 0.3s ease-in-out;
+      }
+
+      .message-text.show {
+        transform: perspective(500px) rotateY(0deg);
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="c" width="948" height="586"></canvas>
+    <div>
+      <h1 id="messageTitle">Bạn có tin nhắn mới</h1>
+      <p id="messageText">Xem ngay</p>
+      <button id="btn">
+        <img src="letters.png" alt="Description" />
+      </button>
+      <div class="message">Bà àaa</div>
+      <div class="message">
+        vậy là hết 1 năm goài ha, tui ước tui muốn được chịu thay bà mỗi khi kì
+        tới tháng của bà hehe,
+      </div>
+      <div class="message">
+        để cho bà còn làm nữa chứ, ăn uống đầy đủ cho khỏe nữa hihi..hôm nay
+        chắc tui mạo muội có chuyện muốn nói với bà…..
+      </div>
+      <div class="message">
+        ….. Chắc từ lúc nhắn tin với bà đến giờ cũng hơn 1 tháng rồi , thật sự
+        nhiều lúc tui không biết phải nhắn gì với bà lun á …..
+      </div>
+      <div class="message">
+        Tui là người nhạt nhẽo lắm luôn á chắc bà cũng biết. Có người bảo tui
+        nha ( mày như vậy ai thèm yêu mày).
+      </div>
+      <div class="message">
+        🌟Nhiều lúc buồn mà không biết nói với ai luôn á(con trai mà).
+      </div>
+      <div class="message">
+        Tui là hơi bị nhớ bà á, mà….. không biết phải nhắn như nào cho bà đỡ
+        thấy phiền nữa..
+      </div>
+      <div class="message">
+        Tkiểu muốn được nói chuyện nhiều với bà á mà thấy thương và gưỡng mộ nữa
+        bằng tuổi mà đã đi làm nhiều như vậy rồi , 😘
+      </div>
+      <div class="message">
+        vậy mà tui còn chưa làm được gì cho cuộc đời này nữa…💕
+      </div>
+      <div class="message">
+        Mấy nay tui đã suy nghĩ rất nhiều liệu mình có thích bà thật sự hay
+        không hay chỉ là cảm nắng nhất thời như tuổi trẻ thời nay nữa.💕
+      </div>
+      <div class="message">
+        Và tui đã nhận ra rằng mình thật sự thích bà , muốn được quan tâm bà mỗi
+        khi bà buồn bà mệt, mỗi khi bà vui , mỗi khi bà cô đơn, muốn được bảo vệ
+        bà nữa. 💕
+      </div>
+      <div class="message">
+        Cùng nhau cố gắng phấn đấu trong cuộc sống đầy bất công và áp lực như
+        này( hơi tiêu cực hehe) và tiến tới một cuộc sống tốt đẹp và mong muốn
+        của hai đứa hơn.💕
+      </div>
+      <div class="message">
+        Thật sự trong chuyện tình cảm tui bắt đầu từ con số không(hehe vì chưa
+        yêu ai bao giờ mà) nghe khó tin qua he. 💕
+      </div>
+      <div class="message">
+        Bằng tuổi ở quê tui là có con bế dòng dòng gọi tui là chú rồi(hehhe).
+        Lần đầu tiên gặp bà, tui đã thấy thích cái cách bà cười, cái cách bà
+        nhìn tui và cả cái cách bà nói chuyện. 💕
+      </div>
+      <div class="message">
+        Đó cũng là lần đầu tiên bà đã phải làm tui suy nghĩ nhiều về hình bóng
+        của bà đến thế. Bà là người con gái thứ hai mà tui thương, tui nhớ, tui
+        yêu và tui muốn bảo vệ đến … chân trời ...(hehe người thứ nhất là mẹ tui
+        heheeee)… 💕
+      </div>
+      <div class="message">
+        trời trời còn nhiều lời mà dài quá bà chắc sẽ đọc chán rồi nhưng nếu
+        không được thì tui sẽ coi bà là một kỉ niệm đẹp mà tui sẽ khó quên
+        hihihi…💕
+      </div>
+      <div class="message">
+        Sang năm mới goài chúc bà và gia đình bà nhiều sức khỏe hành phúc và yêu
+        thương nhau nhé, đặc biệt là bà sẽ luôn xinh đẹp , 💕
+      </div>
+      <div class="message">
+        làm đc nhìu xiền nè, rồi làm những điều mà bà muốn và hạnh phúc hơn năm
+        ngoái….💕
+      </div>
+      <div class="message">
+        Thật sự tui hk bt sao nx đây( chắc bà cũng chả thấy thích gì tui âu he),
+        tại cuối năm đầu năm mới tui mún thổ lộ những điều ở trong lòng mình …
+        💕
+      </div>
+      <div class="message">
+        vậy nên tui rất rât thích bà…… Bà làm người yêu tui nhaaaaa💕💕💕💕
+      </div>
+
+      <div id="msgYes" class="message-text" style="display: none">
+        Chắc chắn năm mới có bà là người sẽ rất rất rất là tuyệt vời nhấttt 💕
+      </div>
+
+      <div class="div-buttons">
+        <button id="btnYes" style="display: none">Đồng Ý</button>
+        <button id="btnNo" style="display: none">Suy nghĩ</button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
